@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>⚡Titulación Ing. Eléctrica - Ventura Gallardo⚡</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --azul-electrico: #007BFF;
+  --gris-suave: #f5f7fa;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Canvas de rayos encima de todo */
+#lightningCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999; /* sobre todo */
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--gris-suave);
+  border-bottom: 2px solid var(--azul-electrico);
+  animation: fadeIn 1.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.logos img {
+  height: 80px;
+  width: auto;
+}
+
+header h1 {
+  color: var(--azul-electrico);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+header h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  color: #555;
+  margin: 0;
+}
+
+#showBtn {
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #fff;
+  background: var(--azul-electrico);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#showBtn:hover {
+  background: #0056b3;
+}
+
+main {
+  padding: 2rem 1rem;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.hidden-section {
+  display: none; 
+  animation: flicker 0.4s;
+}
+
+.video-container {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+  outline: none;
+  pointer-events: none;
+}
+
+.content-box {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 2rem auto;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.content-box h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--azul-electrico);
+}
+
+.map-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 2rem auto 3rem;
+  text-align: center;
+}
+
+.map-container h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--azul-electrico);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 400px;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #666;
+  background-color: var(--gris-suave);
+  border-top: 2px solid var(--azul-electrico);
+  font-size: 0.9rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.4; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="lightningCanvas"></canvas>
+
+<header>
+  <div class="logos">
+    <img src="logoito.png" alt="Logo Instituto">
+    <img src="ElectricaL.png" alt="Logo Ingeniería Eléctrica">
+  </div>
+  <h1>Presentación de Titulación</h1>
+  <h2>Ingeniero Eléctrico </h2>
+  <h1>Ventura Gallardo Francisco de Jesús</h1>
+
+  <button id="showBtn">⚡ Más información ⚡</button>
+</header>
+
+<main>
+  <div id="hiddenContent" class="hidden-section">
+    <div class="video-container">
+      <video autoplay muted loop playsinline>
+        <source src="fondo.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="content-box">
+      <h2>¡Gracias por acompañarme en este logro!</h2>
+      <p>
+        Hoy celebro el cierre de una etapa muy importante en mi vida recibiendome como Ingeniero Eléctrico.
+Agradezco profundamente a los años de esfuerzo, a cada persona que me acompañó y a todos los momentos que hicieron posible llegar hasta aquí.
+Este logro es tan mío como de quienes me apoyaron en cada paso.
+      </p>
+      <p><Strong>🗓️Fecha: </sTrong> Viernes 31 de Octubre del 2025</p>
+      <p><Strong>🕣Hora: </Strong> Apartir de las 3 pm</p>
+      <p><Strong>📌Lugar: </Strong> Casa Ubicada en Calle Ruiz Ochoa #7</p>
+    </div>
+
+    <div class="map-container">
+      <h3>📍 Los esperamos en la siguiente ubicación:</h3>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1466.6327677319916!2d-97.09575859573876!3d18.835489682848944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c5029e572e6c6b%3A0x7e8205ca8583161a!2sRuiz%20Ochoa%2C%2094380%20Orizaba%2C%20Ver.!5e0!3m2!1ses-419!2smx!4v1761626582959!5m2!1ses-419!2smx" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2025 - Evento de Titulación | Instituto Tecnológico
+</footer>
+
+<script>
+const btn = document.getElementById('showBtn');
+const hidden = document.getElementById('hiddenContent');
+const canvas = document.getElementById('lightningCanvas');
+const ctx = canvas.getContext('2d');
+const VISIBLE_DURATION_MS = 350;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Función para dibujar segmentos fractales de relámpago
+function drawLightningSegment(x1, y1, x2, y2, displace, depth) {
+  if (depth <= 0) { ctx.lineTo(x2, y2); return; }
+  const midX = (x1 + x2) / 2;
+  const midY = (y1 + y2) / 2;
+  const newMidX = midX + (Math.random() - 0.5) * displace;
+  const newMidY = midY + (Math.random() - 0.5) * displace;
+
+  drawLightningSegment(x1, y1, newMidX, newMidY, displace * 0.7, depth - 1);
+  ctx.lineTo(newMidX, newMidY);
+
+  if (Math.random() < 0.15 && depth > 2) { 
+    const branchDisplace = displace * 0.5;
+    const branchX = newMidX + (Math.random() - 0.5) * branchDisplace;
+    const branchY = newMidY + (Math.random() - 0.5) * branchDisplace;
+    ctx.moveTo(newMidX, newMidY);
+    drawLightningSegment(newMidX, newMidY, branchX, branchY, branchDisplace * 0.7, depth - 2);
+  }
+
+  ctx.moveTo(newMidX, newMidY); 
+  drawLightningSegment(newMidX, newMidY, x2, y2, displace * 0.7, depth - 1);
+}
+
+// Dibuja un rayo con delay
+function drawSingleLightning(delayMs) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const startX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+      const startY = 0;
+      const endX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+      const endY = canvas.height;
+      const maxDisplacement = canvas.width / 5; 
+      const maxDepth = 6; 
+
+      ctx.strokeStyle = '#FFFFFF'; 
+      ctx.lineWidth = 2 + Math.random() * 2; 
+      ctx.shadowColor = '#00FFFF'; 
+      ctx.shadowBlur = 15; 
+      ctx.lineCap = 'round';
+
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      drawLightningSegment(startX, startY, endX, endY, maxDisplacement, maxDepth);
+      ctx.stroke();
+
+      resolve();
+    }, delayMs);
+  });
+}
+
+// Ráfaga de 3-4 rayos
+async function drawLightningBurst() {
+  const bolts = 3 + Math.floor(Math.random()*2);
+  let totalDelay = 0;
+  for(let i=0;i<bolts;i++){
+    const delay = Math.random()*70;
+    totalDelay += delay;
+    await drawSingleLightning(totalDelay);
+  }
+  await new Promise(r => setTimeout(r, VISIBLE_DURATION_MS));
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+// Tormenta secuencial de 3 ráfagas
+async function triggerLightningStormSequential() {
+  for(let i=0;i<3;i++){
+    await drawLightningBurst();
+  }
+}
+
+// Click del botón
+btn.addEventListener('click', async () => {
+  hidden.style.display = hidden.style.display === 'block' ? 'none' : 'block';
+  btn.textContent = hidden.style.display === 'block' ? 'Ocultar información' : 'Más información';
+  if(hidden.style.display === 'block') {
+    hidden.scrollIntoView({behavior: "smooth"});
+    hidden.classList.add('flickerAnim');
+    setTimeout(()=> hidden.classList.remove('flickerAnim'), 400);
+
+    // Tormenta secuencial de rayos
+    triggerLightningStormSequential();
+  }
+});
+</script>
+
+</body>
+</html>
