@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto de Relámpago Múltiple Dinámico</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #000; /* Fondo oscuro (simulando noche) */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* El Canvas se superpone a todo para dibujar el rayo */
+        #lightningCanvas {
+            position: fixed; /* 'fixed' para cubrir toda la ventana sin importar el scroll */
+            top: 0;
+            left: 0;
+            z-index: 10;
+            pointer-events: none; /* Permite hacer clic a través del canvas */
+        }
+
+        .controls {
+            position: relative; 
+            z-index: 20; /* Asegura que el botón esté encima del canvas */
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ffc107; /* Botón en color llamativo */
+            color: #212529;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #e0a800;
+        }
+
+        #status {
+            margin-top: 10px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="lightningCanvas"></canvas>
+
+    <div class="controls">
+        <button id="triggerButton" onclick="triggerMultipleLightning()">Generar Tormenta de Relámpagos ⛈️</button>
+        <p id="status">Se generarán 4 rayos con un pequeño retardo. Se borrarán después.</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('lightningCanvas');
+        const ctx = canvas.getContext('2d');
+        const button = document.getElementById('triggerButton');
+        let isDrawing = false;
+        
+        // La duración total que el efecto estará visible (antes de borrarse)
+        const VISIBLE_DURATION_MS = 350; 
+
+        // 1. Configuración inicial del Canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // 2. Función recursiva para dibujar un solo relámpago
+        function drawLightningSegment(x1, y1, x2, y2, displace, depth) {
+            if (depth <= 0) {
+                ctx.lineTo(x2, y2);
+                return;
+            }
+
+            const midX = (x1 + x2) / 2;
+            const midY = (y1 + y2) / 2;
+
+            // Agrega aleatoriedad (fractal) al punto medio
+            const newMidX = midX + (Math.random() - 0.5) * displace;
+            const newMidY = midY + (Math.random() - 0.5) * displace;
+
+            drawLightningSegment(x1, y1, newMidX, newMidY, displace * 0.7, depth - 1);
+            ctx.lineTo(newMidX, newMidY); 
+
+            // Pequeña probabilidad de crear una ramificación secundaria
+            if (Math.random() < 0.15 && depth > 2) { 
+                const branchDisplace = displace * 0.5;
+                const branchX = newMidX + (Math.random() - 0.5) * branchDisplace;
+                const branchY = newMidY + (Math.random() - 0.5) * branchDisplace;
+
+                ctx.moveTo(newMidX, newMidY);
+                drawLightningSegment(newMidX, newMidY, branchX, branchY, branchDisplace * 0.7, depth - 2);
+            }
+
+            ctx.moveTo(newMidX, newMidY); 
+            drawLightningSegment(newMidX, newMidY, x2, y2, displace * 0.7, depth - 1);
+        }
+
+        // 3. Dibuja un rayo individual con un ligero retardo para variar su apariencia
+        function drawSingleLightning(delayMs) {
+            setTimeout(() => {
+                // Genera coordenadas aleatorias de inicio y fin
+                const startX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+                const startY = 0;
+                const endX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+                const endY = canvas.height;
+
+                // Parámetros del rayo
+                const maxDisplacement = canvas.width / 5; 
+                const maxDepth = 6; 
+
+                // Configuración del estilo del rayo
+                ctx.strokeStyle = '#FFFFFF'; 
+                // Añade algo de aleatoriedad al ancho para que no todos sean idénticos
+                ctx.lineWidth = 2 + Math.random() * 2; 
+                ctx.shadowColor = '#00FFFF'; 
+                ctx.shadowBlur = 15; // Un poco más de blur para simular más luz
+                ctx.lineCap = 'round';
+
+                // Comienza a dibujar el rayo
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                drawLightningSegment(startX, startY, endX, endY, maxDisplacement, maxDepth);
+                ctx.stroke();
+
+            }, delayMs);
+        }
+
+        // 4. Función principal: genera múltiples relámpagos
+        function triggerMultipleLightning() {
+            if (isDrawing) return;
+            isDrawing = true;
+            button.disabled = true;
+
+            // ⚠️ Borra el canvas ANTES de empezar el ciclo de rayos
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const numberOfBolts = 4; // Queremos 4 rayos
+            let totalDelay = 0;
+
+            for (let i = 0; i < numberOfBolts; i++) {
+                // Genera un retardo entre 0ms y 70ms para cada rayo
+                const delay = Math.random() * 70;
+                totalDelay += delay;
+                
+                // Llama a la función para dibujar un rayo con el retardo acumulado
+                drawSingleLightning(totalDelay);
+            }
+
+            // 5. Temporizador para borrar el efecto completo
+            // Espera a que el último rayo caiga (totalDelay) más la duración de visibilidad.
+            setTimeout(() => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                isDrawing = false;
+                button.disabled = false;
+            }, totalDelay + VISIBLE_DURATION_MS);
+        }
+    </script>
+
+</body>
+</html>
